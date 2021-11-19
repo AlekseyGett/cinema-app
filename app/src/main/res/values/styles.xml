@@ -96,4 +96,9 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="RoundedCornersImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/poster_image_corner_radius</item>
+    </style>
+
 </resources>

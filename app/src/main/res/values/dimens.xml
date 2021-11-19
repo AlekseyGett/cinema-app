@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common -->
+    <dimen name="window_padding">24dp</dimen>
+
+    <!-- Movies -->
+    <dimen name="poster_image_corner_radius">16dp</dimen>
+    <dimen name="poster_image_elevation">4dp</dimen>
+</resources>
