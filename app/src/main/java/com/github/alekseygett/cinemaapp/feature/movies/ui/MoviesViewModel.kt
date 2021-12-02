@@ -3,13 +3,14 @@ package com.github.alekseygett.cinemaapp.feature.movies.ui
 import com.github.alekseygett.cinemaapp.base.BaseViewModel
 import com.github.alekseygett.cinemaapp.base.Event
 import com.github.alekseygett.cinemaapp.feature.movies.domain.MoviesInteractor
+import com.github.alekseygett.cinemaapp.utils.SingleEventHolder
 
 class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<ViewState>() {
 
     override fun initialViewState() = ViewState(
         movies = emptyList(),
         isLoading = false,
-        errorMessage = null
+        singleEvent = null
     )
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
@@ -26,6 +27,14 @@ class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<
                         processDataEvent(DataEvent.OnFailureMoviesRequest(errorMessage))
                     }
                 )
+
+                return null
+            }
+            is UiEvent.OnMoviePosterClick -> {
+                val openMovieScreenEvent = SingleEvent.OpenMovieDetailsScreen(event.movie)
+                return previousState.copy(
+                    singleEvent = SingleEventHolder(openMovieScreenEvent)
+                )
             }
             is DataEvent.OnLoadData -> {
                 return previousState.copy(isLoading = true)
@@ -34,11 +43,14 @@ class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<
                 return previousState.copy(movies = event.movies, isLoading = false)
             }
             is DataEvent.OnFailureMoviesRequest -> {
-                return previousState.copy(errorMessage = event.errorMessage, isLoading = false)
+                val showErrorMessageEvent = SingleEvent.ShowErrorMessage(event.errorMessage)
+                return previousState.copy(
+                    singleEvent = SingleEventHolder(showErrorMessageEvent),
+                    isLoading = false
+                )
             }
+            else -> return null
         }
-
-        return null
     }
 
 }

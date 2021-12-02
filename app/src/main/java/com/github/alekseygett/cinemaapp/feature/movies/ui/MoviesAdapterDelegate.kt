@@ -1,7 +1,7 @@
 package com.github.alekseygett.cinemaapp.feature.movies.ui
 
 import com.github.alekseygett.cinemaapp.databinding.ItemMovieBinding
-import com.github.alekseygett.cinemaapp.feature.movies.domain.model.Movie
+import com.github.alekseygett.cinemaapp.domain.models.Movie
 import com.github.alekseygett.cinemaapp.utils.loadImage
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateViewBinding
 

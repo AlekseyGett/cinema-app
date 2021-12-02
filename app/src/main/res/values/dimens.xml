@@ -6,4 +6,7 @@
     <!-- Movies -->
     <dimen name="poster_image_corner_radius">16dp</dimen>
     <dimen name="poster_image_elevation">4dp</dimen>
+
+    <!-- Movie -->
+
 </resources>

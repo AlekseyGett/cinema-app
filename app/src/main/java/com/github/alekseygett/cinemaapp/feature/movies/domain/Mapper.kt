@@ -3,8 +3,8 @@ package com.github.alekseygett.cinemaapp.feature.movies.domain
 import com.github.alekseygett.cinemaapp.feature.movies.data.model.GenreModel
 import com.github.alekseygett.cinemaapp.feature.movies.data.model.MovieModel
 import com.github.alekseygett.cinemaapp.feature.movies.data.model.MoviesModel
-import com.github.alekseygett.cinemaapp.feature.movies.domain.model.Genre
-import com.github.alekseygett.cinemaapp.feature.movies.domain.model.Movie
+import com.github.alekseygett.cinemaapp.domain.models.Genre
+import com.github.alekseygett.cinemaapp.domain.models.Movie
 import java.text.SimpleDateFormat
 import java.util.*
 

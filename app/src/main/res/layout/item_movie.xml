@@ -9,5 +9,6 @@
     android:layout_margin="@dimen/window_padding"
     android:scaleType="centerCrop"
     android:elevation="@dimen/poster_image_elevation"
+    android:contentDescription="@string/poster_description"
     app:shapeAppearance="@style/RoundedCornersImageView"
     tools:src="@drawable/ic_launcher_background" />

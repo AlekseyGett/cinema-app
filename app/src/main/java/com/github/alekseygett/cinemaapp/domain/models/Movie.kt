@@ -1,7 +1,10 @@
-package com.github.alekseygett.cinemaapp.feature.movies.domain.model
+package com.github.alekseygett.cinemaapp.domain.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 data class Movie(
     val id: Int,
     val title: String,
@@ -16,4 +19,4 @@ data class Movie(
     val voteCount: Int,
     val posterUrl: String,
     val videoUrl: String
-)
+) : Parcelable

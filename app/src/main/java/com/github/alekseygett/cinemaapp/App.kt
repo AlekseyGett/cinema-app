@@ -1,6 +1,8 @@
 package com.github.alekseygett.cinemaapp
 
 import android.app.Application
+import com.github.alekseygett.cinemaapp.di.appModule
+import com.github.alekseygett.cinemaapp.feature.details.di.movieDetailsModule
 import com.github.alekseygett.cinemaapp.feature.movies.di.moviesModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +16,7 @@ class App : Application() {
             androidLogger()
             androidContext(applicationContext)
 
-            modules(moviesModule)
+            modules(appModule, moviesModule, movieDetailsModule)
         }
     }
 }

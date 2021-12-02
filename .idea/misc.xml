@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/drawable/broken_image.xml" value="0.35462962962962963" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/drawable/broken_image_icon.xml" value="0.36018518518518516" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/drawable/image_placeholder.xml" value="0.35462962962962963" />
         <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
-        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/layout/fragment_movies.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/layout/fragment_movie.xml" value="0.2638888888888889" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/layout/fragment_movies.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/Dev/Documents/Study/AndroidProjects/CinemaApp/app/src/main/res/layout/item_movie.xml" value="0.3175925925925926" />
       </map>
     </option>
   </component>
