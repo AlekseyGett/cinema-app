@@ -1,9 +1,12 @@
 package com.github.alekseygett.cinemaapp.feature.movies.ui
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.github.alekseygett.cinemaapp.base.BaseViewModel
 import com.github.alekseygett.cinemaapp.base.Event
 import com.github.alekseygett.cinemaapp.feature.movies.domain.MoviesInteractor
 import com.github.alekseygett.cinemaapp.utils.SingleEventHolder
+import javax.inject.Inject
 
 class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<ViewState>() {
 
@@ -51,6 +54,18 @@ class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<
             }
             else -> return null
         }
+    }
+
+    class Factory @Inject constructor(
+        private val interactor: MoviesInteractor
+    ) : ViewModelProvider.Factory {
+
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            require(modelClass == MoviesViewModel::class.java)
+            return MoviesViewModel(interactor) as T
+        }
+
     }
 
 }

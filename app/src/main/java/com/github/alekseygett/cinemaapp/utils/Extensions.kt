@@ -1,12 +1,21 @@
 package com.github.alekseygett.cinemaapp.utils
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.github.alekseygett.cinemaapp.App
 import com.github.alekseygett.cinemaapp.R
+import com.github.alekseygett.cinemaapp.di.AppComponent
 import com.hannesdorfmann.adapterdelegates4.AbsDelegationAdapter
+
+val Context.appComponent: AppComponent
+    get() = when(this) {
+        is App -> this.appComponent
+        else -> this.applicationContext.appComponent
+    }
 
 fun ImageView.loadImage(
     src: String?,

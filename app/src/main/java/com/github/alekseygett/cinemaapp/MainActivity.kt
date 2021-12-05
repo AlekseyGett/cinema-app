@@ -3,6 +3,7 @@ package com.github.alekseygett.cinemaapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.github.alekseygett.cinemaapp.feature.movies.ui.MoviesFragment
 
 class MainActivity : AppCompatActivity() {
@@ -14,10 +15,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(android.R.id.content, fragment)
-            .commit()
+        supportFragmentManager.commit {
+            replace(android.R.id.content, fragment)
+        }
     }
 
 }

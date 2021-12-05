@@ -1,23 +1,34 @@
 package com.github.alekseygett.cinemaapp.feature.movies.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.alekseygett.cinemaapp.R
 import com.github.alekseygett.cinemaapp.databinding.FragmentMoviesBinding
 import com.github.alekseygett.cinemaapp.feature.details.ui.MovieDetailsFragment
+import com.github.alekseygett.cinemaapp.utils.appComponent
 import com.github.alekseygett.cinemaapp.utils.loadData
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
+    companion object {
+        fun newInstance() = MoviesFragment()
+    }
+
+    @Inject
+    lateinit var factory: MoviesViewModel.Factory
+
+    private val viewModel: MoviesViewModel by viewModels { factory }
     private val binding: FragmentMoviesBinding by viewBinding()
-    private val viewModel: MoviesViewModel by viewModel()
 
     private val moviesAdapter by lazy {
         ListDelegationAdapter(
@@ -27,8 +38,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         )
     }
 
-    companion object {
-        fun newInstance() = MoviesFragment()
+    override fun onAttach(context: Context) {
+        requireContext().appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,10 +84,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private fun navigateTo(fragment: Fragment) {
         val fragmentManager = requireActivity().supportFragmentManager
 
-        fragmentManager
-            .beginTransaction()
-            .replace(android.R.id.content, fragment)
-            .commit()
+        fragmentManager.commit {
+            replace(android.R.id.content, fragment)
+        }
     }
 
     private fun showErrorMessage(errorMessage: String) {

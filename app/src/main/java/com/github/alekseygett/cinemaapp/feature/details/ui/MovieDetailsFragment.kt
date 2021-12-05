@@ -1,16 +1,18 @@
 package com.github.alekseygett.cinemaapp.feature.details.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.alekseygett.cinemaapp.R
 import com.github.alekseygett.cinemaapp.databinding.FragmentMovieBinding
 import com.github.alekseygett.cinemaapp.domain.models.Movie
+import com.github.alekseygett.cinemaapp.utils.appComponent
 import com.github.alekseygett.cinemaapp.utils.loadImage
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie) {
 
@@ -22,11 +24,20 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie) {
         }
     }
 
-    private val viewModel: MovieDetailsViewModel by viewModel {
-        parametersOf(requireArguments().getParcelable<Movie>(MOVIE_KEY))
+    @Inject
+    lateinit var factoryProvider: MovieDetailsViewModel.FactoryProvider
+
+    private val viewModel: MovieDetailsViewModel by viewModels {
+        val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
+        factoryProvider.provide(movie)
     }
 
     private val binding: FragmentMovieBinding by viewBinding()
+
+    override fun onAttach(context: Context) {
+        requireContext().appComponent.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
