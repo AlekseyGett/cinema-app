@@ -1,16 +1,30 @@
 package com.github.alekseygett.cinemaapp.feature.movies.ui
 
+import com.github.alekseygett.cinemaapp.Screens
 import com.github.alekseygett.cinemaapp.base.BaseViewModel
 import com.github.alekseygett.cinemaapp.base.Event
 import com.github.alekseygett.cinemaapp.feature.movies.domain.MoviesInteractor
-import com.github.alekseygett.cinemaapp.utils.SingleEventHolder
+import com.github.alekseygett.cinemaapp.utils.MutableSingleLiveEvent
+import com.github.alekseygett.cinemaapp.utils.SingleLiveEvent
+import com.github.terrakok.cicerone.Router
 
-class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<ViewState>() {
+class MoviesViewModel(
+    private val interactor: MoviesInteractor,
+    private val router: Router
+) : BaseViewModel<ViewState>() {
+
+    init {
+        processUiEvent(UiEvent.OnMoviesRequest)
+    }
+
+    private val _singleEvent = MutableSingleLiveEvent<SingleEvent>()
+
+    val singleEvent: SingleLiveEvent<SingleEvent>
+        get() = _singleEvent
 
     override fun initialViewState() = ViewState(
         movies = emptyList(),
-        isLoading = false,
-        singleEvent = null
+        isLoading = false
     )
 
     override suspend fun reduce(event: Event, previousState: ViewState): ViewState? {
@@ -31,10 +45,8 @@ class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<
                 return null
             }
             is UiEvent.OnMoviePosterClick -> {
-                val openMovieScreenEvent = SingleEvent.OpenMovieDetailsScreen(event.movie)
-                return previousState.copy(
-                    singleEvent = SingleEventHolder(openMovieScreenEvent)
-                )
+                router.navigateTo(Screens.movieDetails(event.movie))
+                return null
             }
             is DataEvent.OnLoadData -> {
                 return previousState.copy(isLoading = true)
@@ -44,10 +56,8 @@ class MoviesViewModel(private val interactor: MoviesInteractor) : BaseViewModel<
             }
             is DataEvent.OnFailureMoviesRequest -> {
                 val showErrorMessageEvent = SingleEvent.ShowErrorMessage(event.errorMessage)
-                return previousState.copy(
-                    singleEvent = SingleEventHolder(showErrorMessageEvent),
-                    isLoading = false
-                )
+                _singleEvent.postValue(showErrorMessageEvent)
+                return previousState.copy(isLoading = false)
             }
             else -> return null
         }

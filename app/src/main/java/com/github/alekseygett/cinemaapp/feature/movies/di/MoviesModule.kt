@@ -6,6 +6,7 @@ import com.github.alekseygett.cinemaapp.feature.movies.data.api.MoviesApi
 import com.github.alekseygett.cinemaapp.feature.movies.data.api.MoviesRemoteSource
 import com.github.alekseygett.cinemaapp.feature.movies.domain.MoviesInteractor
 import com.github.alekseygett.cinemaapp.feature.movies.ui.MoviesViewModel
+import com.github.terrakok.cicerone.Router
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -51,6 +52,6 @@ val moviesModule = module {
     }
 
     viewModel<MoviesViewModel> {
-        MoviesViewModel(get<MoviesInteractor>())
+        MoviesViewModel(get<MoviesInteractor>(), get<Router>())
     }
 }
