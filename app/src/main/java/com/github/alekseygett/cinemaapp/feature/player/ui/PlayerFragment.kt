@@ -57,6 +57,11 @@ class PlayerFragment : Fragment(R.layout.fragment_player) {
         showSystemUi()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        requireActivity().unbindService(serviceConnection)
+    }
+
     private fun startPlayerService() {
         val movie = requireArguments().getParcelable<Movie>(MOVIE_KEY)!!
         val intent = Intent(requireContext(), PlayerService::class.java)

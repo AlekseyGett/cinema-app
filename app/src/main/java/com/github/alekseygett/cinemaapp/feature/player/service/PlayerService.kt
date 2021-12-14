@@ -111,9 +111,7 @@ class PlayerService : Service() {
     }
 
     private fun stopPlayer() {
-        player.apply {
-            stop()
-        }
+        player.stop()
     }
 
     private inner class PlayerEventListener : Player.Listener {
