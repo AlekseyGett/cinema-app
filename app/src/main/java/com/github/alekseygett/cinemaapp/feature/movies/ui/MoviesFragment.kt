@@ -40,12 +40,9 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
     private fun initViewPager() {
-        binding.moviesCarousel.apply {
+        binding.moviesRecyclerView.apply {
             adapter = moviesAdapter
-            orientation = ViewPager2.ORIENTATION_HORIZONTAL
         }
-
-        binding.dotsIndicator.setViewPager2(binding.moviesCarousel)
     }
 
     private fun render(viewState: ViewState) {
