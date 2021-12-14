@@ -2,22 +2,32 @@ package com.github.alekseygett.cinemaapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import com.github.alekseygett.cinemaapp.feature.movies.ui.MoviesFragment
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
+    private val router: Router by inject()
+    private val navigatorHolder: NavigatorHolder by inject()
+    private val navigator = AppNavigator(this, R.id.fragmentContainer)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        navigateTo(MoviesFragment.newInstance())
+        router.newRootScreen(Screens.movies())
     }
 
-    private fun navigateTo(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(android.R.id.content, fragment)
-            .commit()
+    override fun onResume() {
+        super.onResume()
+        navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
     }
 
 }
