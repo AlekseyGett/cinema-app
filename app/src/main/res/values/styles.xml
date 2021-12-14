@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="ExpandedTitle" parent="@style/TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="CollapsedTitle" parent="@style/TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
     <style name="BoldText">
         <item name="android:fontFamily">sans-serif-black</item>

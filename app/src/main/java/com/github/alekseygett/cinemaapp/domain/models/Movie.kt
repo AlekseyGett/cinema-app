@@ -19,4 +19,25 @@ data class Movie(
     val voteCount: Int,
     val posterUrl: String,
     val videoUrl: String
-) : Parcelable
+) : Parcelable {
+
+    companion object {
+        val empty = Movie(
+            id = -1,
+            title = "",
+            overview = "",
+            releaseDate = Date(),
+            originalTitle = "",
+            originalLanguage = "",
+            adult = false,
+            genres = emptyList(),
+            popularity = 0.0,
+            averageVote = 0.0,
+            voteCount = 0,
+            posterUrl = "",
+            videoUrl = ""
+        )
+    }
+
+}
+
